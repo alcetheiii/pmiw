@@ -15,7 +15,7 @@ function cargarEscena(){
     if(estado === i){
       cargarFondo(fondos[i],0,0,640,480,RIGHT);
     }
-    if(OpcionesEnEscena !== ""){
+    if(opciones !== ""){
       dibBoton();
     }
   }
