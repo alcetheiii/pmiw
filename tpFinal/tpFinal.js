@@ -34,6 +34,7 @@ function draw() {
     
 }
 
+//Probablemente esto se pueda reducir con un for
 function mousePressed(){
   print("mousepressed det");
   if(estado===3)
