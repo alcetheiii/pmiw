@@ -43,15 +43,4 @@ function mousePressed(){
     clickbtn(width/2,height/2,60,60,4);
     clickbtn();
   }
-  else if (estado===4)
-  {
-    clickbtn();
-    clickbtn();
-    clickbtn();
-  }
-  else if (estado===6)
-  {
-    clickbtn();
-    clickbtn();
-  }
 }
