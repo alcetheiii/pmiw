@@ -1,46 +1,44 @@
+/*
+Gabriel Vega 119164/3
+Alex sena 119144/8
+Comisión 1
+video:
+*/
 
 let fondos = [];
 let textos = [];
-let opciones = [];
 
 let estado;
-let num;
-
-let sector;
 
 function preload(){
    //para cargar todas las imagenes de una usando iteracion 
- for(let i=0; i<9; i++){
-   fondos[i] = loadImage("data/fondo"+i+".jpg");
+ for(let i=0; i<16; i++){
+   fondos[i] = loadImage("data/fondos/fondo"+i+".jpg");
  }
-
  //para cargar todos los textos de una usando iteracion
- for(let i=0; i<4; i++){
-   textos[i] = loadStrings("data/texto"+i+".txt");
+ for(let i=0; i<24; i++){
+   textos[i] = loadStrings("data/textos/texto"+i+".txt");
  }
 }
 
 function setup() {
   createCanvas(640, 480);
+  imageMode(RIGHT)
   estado = 0;
-  num = 0;
   textSize(20);
 }
 
 function draw() {
-    print(mouseX+"/"+mouseY+" |estás dentro: "+sector+" estado:"+estado);
-    
+    print(mouseX+"/"+mouseY+" estado: "+estado);  
     cargarEscena();
-    
 }
-
-//Probablemente esto se pueda reducir con un for
+ /* 
 function mousePressed(){
-  print("mousepressed det");
-  if(estado===3)
-  {
-    print("Estado Det");
-    clickbtn(width/2,height/2,60,60,4);
-    clickbtn();
+  for(let i=0; i<15; i++){
+    if(estado == i){
+      //clickbtn(20, 420, 100, 50, i--)
+      clickbtn(470, 420, 100, 50, i++)
+    }
   }
 }
+*/
