@@ -7,7 +7,7 @@ function cargarFondo(img, x, y, ancho, alto, alinea){
 function cargarTexto(txt, x, y){
   push()
   fill(255,255,255);
-  text(txt, x, y);
+  text(txt, x, y,600);
   noFill();
   pop()
 }
@@ -83,12 +83,13 @@ function boton(x, y, ancho, alto, txt){
   }
     rect(x,y,ancho,alto);
     push()
-    textAlign(LEFT);
+    textAlign(CENTER);
     fill(255,255,255);
-    text(txt,x+35,y+15);
+    text(txt,x+(ancho/2),y+(alto/2)+5);
     noFill();
     pop()
 }
+
 
 
 //ACA se identifica el sector para los respectivos botones de cada escena
