@@ -2,7 +2,7 @@
 Gabriel Vega 119164/3
 Alex sena 119144/8
 Comisión 1
-video:
+video (Alex): https://youtu.be/gt3gNyA_dUw
 */
 
 //funciones para las escenas
