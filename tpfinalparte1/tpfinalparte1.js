@@ -8,10 +8,12 @@ video (Alex): https://youtu.be/gt3gNyA_dUw
 //funciones para las escenas
 let fondos = [];
 let textos = [];
-let estado;
+let estado;  
 
 //funciones para el sonido
 let sFondo, sBoton;
+
+let CENTRO;
 
 function preload(){
    //para cargar todas las imagenes de una usando iteracion 
@@ -25,6 +27,7 @@ function preload(){
   //cargar sonidos
  sFondo = loadSound("data/sonidos/fondo.mp3");
  sBoton = loadSound("data/sonidos/boton.mp3");
+
 }
 
 function setup() {
@@ -32,9 +35,10 @@ function setup() {
   imageMode(RIGHT)
   estado = 0;
   textSize(20);
+  CENTRO = [width/2,height/2];
 }
 
+
 function draw() {
-    print(mouseX+"/"+mouseY+" estado: "+estado);  
     cargarEscena();
 }
