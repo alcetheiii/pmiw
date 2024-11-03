@@ -1,96 +1,159 @@
-
-//para DIBUJAR el boton
-function boton(x, y, txt) {
-  if (sector(x, y, 150, 50)) {
-    fill(0, 0, 0);
-  } else {
-    fill(150, 155, 255);
+//pregunta si la variable sFondo NO está sonando y si es correcto q no suena
+//entonces la prende en loop
+function musicaFondo(){
+ if (!sFondo.isPlaying()){
+    sFondo.loop(true);
   }
-  rect(x, y, 150, 50);
+}
+//se cargan tanto las imagenes como los textos (es la misma shit)
+function cargarFondo(img, x, y){
+  image(img, x, y, width, height);
+}
+//esta función se usa dentro y fuera de los botones
+function cargarTexto(txt, x, y){
   push()
-    textAlign(CENTER);
-  fill(255, 255, 255);
-  text(txt, x+75, y+30);
+  noStroke();
+  if(txt !== ""){
+  fill(0,0,0,80);
+  //rect(x-10,y+90,590,y+100);
+  rect(x,y,x+400,y+100)
+  pop()
+  }
+  push()
+  textSize(14);
+  fill(255,255,255);
+  text(txt, x, y,400);
   noFill();
   pop()
 }
-
-//RETORNA el valor de sector, sectoriza la zona
-function sector(sx, sy, sancho, salto) {
-  return mouseX > sx && mouseX < sx+sancho && mouseY > sy && mouseY < sy+salto;
-}
-
-//para hacer que al clickear el sector se AUMENTE la variable ESTADO
-function clickbtn(bx, by, target) {
-  if (sector(bx, by, 150, 50)) {
-    sBoton.play();
-    estado = target;
-    print("", estado);
-  }
-}
-
-//el clickbutton que usamos para la eleccion de mas tarde
-function clickbtnEspecial(bx, by, target, dir) {
-  if (sector(bx, by, 150, 50)) {
-    sBoton.play();
-    estado = target
-      ruta = dir
-  }
-}
-//TEMPLATE 2btns
-//clickbtn(CENTRO[0]/4 , CENTRO[1]+(CENTRO[1]/2), <target>);
-//clickbtn(CENTRO[0]+(CENTRO[0]/4) , CENTRO[1]+(CENTRO[1]/2), <target>);
-function mousePressed() {
-  musicaFondo();
-  //pantalla principal
-  if (estado === 0) {
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), -1);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 1);
-    //12 de enero
-  } else if (estado === 1) {//0,2
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 0);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 2);
-    //20 de enero
-  } else if (estado === 2) {//1,14
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 1);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 14);
-    //Sueño (eleccion)
-  } else if (estado === 3) {
-    clickbtnEspecial(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 4, "jujuy");
-    clickbtnEspecial(CENTRO[0]-80, CENTRO[1]+(CENTRO[1]/2), 4, "budapest");
-    clickbtnEspecial(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 4, "quetzaltenango");
-    //28 de enero
-  } else if (estado === 4) {//3,5
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 3);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 5);
-    //30 de enero casamiento
-  } else if (estado === 5) {//13,6
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 13);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 6);
-    //31 de enero
-  } else if (estado === 6) {
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2),5);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 7);
-    //7 de febrero
-  } else if (estado === 7) {
-    clickbtn( CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 6);
-    if (ruta === "budapest") {
-      clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 8);
-    } else if (ruta === "jujuy") {
-      clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 9);
-    } else if (ruta === "quetzaltenango") {
-      clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 10);
+function Escena(img,cuento,txt0,txt1,txt2,NumBotones){
+    cargarFondo(img, 0, 0);
+    cargarTexto(cuento, CENTRO[0]/4, CENTRO[1]/2);
+    if(NumBotones === 1){
+    boton(CENTRO[0]-80,CENTRO[1]+(CENTRO[1]/2), txt0);
     }
-    //ganar minijuego
-  } else if (estado === 11) {//0,12
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 0);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 12);
-    //minijuego (Gana o pierde)
-  } else if (estado === 14) {//11,3
-    clickbtn(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), 11);
-    clickbtn(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), 3);
-    //finales (Como usan el mismo boton los junte)
-  } else if (estado === -1 || estado === 8 || estado === 9 || estado === 10 || estado === 12 || estado === 13) {
-    clickbtn(CENTRO[0]-80, CENTRO[1]+(CENTRO[1]/2), 0);
+    if(NumBotones === 2){
+    boton(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2),txt0);
+    boton(CENTRO[0]+(CENTRO[0]/4) , CENTRO[1]+(CENTRO[1]/2),txt1);
+    
+    } else if(NumBotones === 3){
+    boton(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), txt0);
+    boton(CENTRO[0]-80, CENTRO[1]+(CENTRO[1]/2), txt1);
+    boton(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), txt2);
+    }
+}
+function cargarEscena(){
+    if(estado == 0){
+    Escena(fondos[0],"",textos[1],textos[2],0,2);
+    }
+    if(estado === 1){
+    Escena(fondos[1],textos[9],textos[0],textos[2],0,2);
+    }
+    if(estado === 2){
+    Escena(fondos[2],textos[10],textos[0],textos[2],0,2);
+    }
+    if(estado === 3){
+    Escena(fondos[3],textos[11],textos[3],textos[4],textos[5],3);
+    }
+    if(estado === 4){
+    Escena(fondos[4],textos[12],textos[0],textos[2],0,2);
+    }
+    if(estado === 5){
+    Escena(fondos[5],textos[13],textos[7],textos[8],0,2);
+    }
+    if(estado === 6){
+    Escena(fondos[6],textos[14],textos[0],textos[2],0,2);
+    }
+    if(estado === 7){
+    Escena(fondos[7],textos[15],textos[0],textos[2],0,2);
+    }
+    if(estado === 8){
+    Escena(fondos[8],textos[16],textos[6],0,0,1);
+    }
+    if(estado === 9){
+    Escena(fondos[9],textos[19],textos[6],0,0,1);
+    }
+    if(estado === 10){
+    Escena(fondos[10],textos[20],textos[6],0,0,1);
+    }
+    if(estado === 11){
+    Escena(fondos[11],textos[17],textos[0],textos[2],0,2);
+    }
+    if(estado === 12){
+    Escena(fondos[12],textos[18],textos[6],0,0,1);
+    }
+    if(estado === 13){
+    Escena(fondos[13],textos[24],textos[6],0,0,1);
+    }
+    if(estado === 14){
+    Escena(fondos[15],textos[23],textos[0],textos[2],0,2);
+    }
+    if(estado === -1){
+    Escena(fondos[14],"",textos[6],0,0,1);
+    }
+}
+
+/*
+Dejo esto para comparación
+
+function pruebaEscenaLite(img, x, y, an, al, txt, x2, y2, txt2, x3, y3, an2, al2, txt3, x4, y4, an3, al3, txt4, x5, y5, an4, al4){
+    cargarFondo(img, x, y, an, al);
+    cargarTexto(txt, x2, y2);
+    boton(x3, y3, an2, al2, txt2);
+    boton(x4, y4, an3, al3, txt3);
+    boton(x5, y5, an4, al4, txt4);
+}
+//ACA se llaman a todas las escenas con CONDICIONALESSSS
+function cargarEscena(){
+  if(estado == 0){
+    pruebaEscenaLite(fondos[0], 0, 0, 640, 480, 0, -100, 0,  textos[1], 20, 420, 150, 50,  textos[2], 470, 420, 150, 50, 0,-100,0,0,0);
+  }
+  else if(estado == -1){
+    pruebaEscenaLite(fondos[14], 0, 0, 640, 480, 0, -100, 0,  textos[0], 250, 420, 150, 50,  0,-100,0,0,0,0,-100,0,0,0);
+  }
+  else if(estado == 1){
+    pruebaEscenaLite(fondos[1], 0, 0, 640, 480, textos[9], 50, 200,  textos[0], 20, 420, 150, 50,  textos[2], 470, 420, 150, 50,0,-100,0,0,0);
+  }
+  else if(estado == 2){
+    pruebaEscenaLite(fondos[2], 0, 0, 640, 480, textos[10], 50, 200,  textos[0], 20, 420, 150, 50,  textos[2], 470, 420, 150, 50, 0,-100,0,0,0);
+  }
+  else if(estado == 3){
+    pruebaEscenaLite(fondos[3], 0, 0, 640, 480, textos[11], 50, 200,  textos[3], 20, 420, 150, 50,  textos[4], 250, 420, 150, 50, textos[5], 470, 420, 150, 50);
+  }//OPCIONES DEL DESTINO DE LA LEJANA
+  else if(estado == 4){
+    pruebaEscenaLite(fondos[4], 0, 0, 640, 480, textos[12], 50, 200,  textos[2], 250, 420, 150, 50,  0,-100,0,0,0,  0,-100,0,0,0 );
+  }
+  //aca hay q poner 3 opciones en donde si abandona la boda o no
+  else if(estado == 5){
+    pruebaEscenaLite(fondos[5], 0, 0, 640, 480, textos[13], 50, 200,  textos[7], 20, 420, 150, 50,  textos[8], 470, 420, 150, 50,  0, -100,0,0,0);
+  }
+  else if(estado == 6){
+    pruebaEscenaLite(fondos[6], 0, 0, 640, 480, textos[14], 50, 200,  textos[2], 250, 420, 150, 50,  0,-100,0,0,0, 0,-100,0,0,0);
+  }
+  else if(estado == 7){
+    pruebaEscenaLite(fondos[7], 0, 0, 640, 480, textos[15], 50, 200,  textos[0], 20, 420, 150, 50,  textos[2], 470, 420, 150, 50, 0, -100,0,0,0);
+  }
+  else if(estado == 8){
+    pruebaEscenaLite(fondos[8], 0, 0, 640, 480, textos[16], 50, 100,  textos[0], 250, 420, 150, 50,  0,-100,0,0,0, 0,-100,0,0,0);
+  }
+  else if(estado == 9){
+    pruebaEscenaLite(fondos[9], 0, 0, 640, 480, textos[19], 50, 200,  textos[0], 250, 420, 150, 50,  0,-100,0,0,0, 0,-100,0,0,0);
+  }
+  else if(estado == 10){
+    pruebaEscenaLite(fondos[10], 0, 0, 640, 480, textos[20], 50, 200,  textos[0], 250, 420, 150, 50,  0,-100,0,0,0, 0,-100,0,0,0);
+  }//gana minijuego
+  else if(estado == 11){
+    pruebaEscenaLite(fondos[11], 0, 0, 640, 480, textos[17], 50, 200,  textos[0], 20, 420, 150, 50,   textos[2], 470, 420, 150, 50,  0,-100,0,0,0);
+  }
+  else if(estado == 12){
+    pruebaEscenaLite(fondos[12], 0, 0, 640, 480, textos[18], 50, 200,  textos[0], 250, 420, 150, 50,   0,-100,0,0,0, 0,-100,0,0,0);
+  }//FIN DE LORE MINIJUEGO
+  //SI ELIGE ABANDONAR LA BODA
+  else if(estado == 13){
+    pruebaEscenaLite(fondos[13], 0, 0, 640, 480, textos[24],50, 200,  textos[0], 250, 420, 150, 50,   0,-100,0,0,0, 0,-100,0,0,0);
+  }
+  else if(estado == 14){
+    pruebaEscenaLite(fondos[15], 0, 0, 640, 480, textos[23], 50, 200,  textos[21], 20, 420, 150, 50,   textos[22], 470, 420, 150, 50, 0,-100,0,0,0);
   }
 }
+*/
