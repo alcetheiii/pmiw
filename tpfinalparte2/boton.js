@@ -1,4 +1,3 @@
-//esta clase no deberia existir
 class Boton {
   constructor(x, y, ancho, alto, txt, escena) { //optimizar esto
     this.x = x;         
