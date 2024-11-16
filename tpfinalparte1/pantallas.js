@@ -30,16 +30,16 @@ function Escena(img,cuento,txt0,txt1,txt2,NumBotones){
     cargarFondo(img, 0, 0);
     cargarTexto(cuento, CENTRO[0]/4, CENTRO[1]/2);
     if(NumBotones === 1){
-    boton(CENTRO[0]-80,CENTRO[1]+(CENTRO[1]/2), txt0);
+    boton(MEDIO[0],MEDIO[1], txt0);
     }
     if(NumBotones === 2){
-    boton(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2),txt0);
-    boton(CENTRO[0]+(CENTRO[0]/4) , CENTRO[1]+(CENTRO[1]/2),txt1);
+    boton(IZQUIERDA[0],IZQUIERDA[1],txt0);
+    boton(DERECHA[0],DERECHA[1],txt1);
     
     } else if(NumBotones === 3){
-    boton(CENTRO[0]/4, CENTRO[1]+(CENTRO[1]/2), txt0);
-    boton(CENTRO[0]-80, CENTRO[1]+(CENTRO[1]/2), txt1);
-    boton(CENTRO[0]+(CENTRO[0]/4), CENTRO[1]+(CENTRO[1]/2), txt2);
+    boton(IZQUIERDA[0], IZQUIERDA[1], txt0);
+    boton(MEDIO[0],MEDIO[1], txt1);
+    boton(DERECHA[0], DERECHA[1], txt2);
     }
 }
 function cargarEscena(){
