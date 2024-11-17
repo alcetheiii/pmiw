@@ -1,5 +1,9 @@
 //Alex Sena 119144/8
-
+//Gabriel Vega 119164/3
+/*
+Debido a mal calculo de tiempo, no llegamos a completar el trabajo, aun asi, queremos mostrar nuestros avances, las correcciones de la parte 1 estan hechas
+disculpamos la molestia -alex
+*/
 
 //carga las imagenes
 let imagenes = [];
