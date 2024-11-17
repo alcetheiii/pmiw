@@ -1,3 +1,6 @@
+//Alex Sena 119144/8
+
+
 //carga las imagenes
 let imagenes = [];
 //para llamar a la clase controlador en setup
