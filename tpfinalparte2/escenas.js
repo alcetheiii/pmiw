@@ -1,42 +1,37 @@
-class Fondo{
- constructor(){
-  this.x = 0;
-  this.y = 0;
- } 
+class Escena {
+  //coloca la escena en pantalla para 
+  cargarEscena(img) {
+    image(img, 0, 0, width, height);
+  }
   
-cargarFondo(img){
-image(img, 0, 0, width, height);
-}
+  dibujarEscena(imgFondo, escena) {
+    this.cargarEscena(imagenes[imgFondo]);
 
-dibujarFondo(imgFondo, escena){
-this.cargarFondo(imagenes[imgFondo]);
-
-if(escena === 1){
-menu();
-}else if(escena === 2){
-instrucciones();
-}else if(escena === 3){
-victoria();
-}else if(escena === 4){
-derrota();
-}
-}
+    if (escena === 1) {
+      this.menu();
+    } else if (escena === 2) {
+      this.instrucciones();
+    } else if (escena === 3) {
+      this.victoria();
+    } else if (escena === 4) {
+      this.derrota();
+    }
+  }
 
 
-menu(){
-this.dibujarFondo(3,0);
-}
+  menu() {
+    this.dibujarEscena(3, 0);
+  }
 
-instrucciones(){
-this.dibujarFondo(4,1);
-}
+  instrucciones() {
+    this.dibujarEscena(4, 1);
+  }
 
-derrota(){
-this.dibujarFondo(1,3);
-}
+  derrota() {
+    this.dibujarEscena(1, 3);
+  }
 
-victoria(){
-this.dibujarFondo(2,4);
-}
-
+  victoria() {
+    this.dibujarEscena(2, 4);
+  }
 }
