@@ -1,34 +1,39 @@
-//alex sena 
+/*
+Gabriel Vega
+119164/3
+
+*/
 
 //carga las imagenes
 let imagenes = [];
 //para llamar a la clase controlador en setup
-let control ;
+let control;
 //sonidos
-let sboton;
+let sBoton, sJuego;
 
 
 function preload(){
  for(let i=0; i<5; i++){
    imagenes[i] = loadImage("data/fondo"+i+".png");
  }
+ 
  sBoton = loadSound("data/boton.mp3");
+ sJuego = loadSound("data/musicaJuego.mp3");
+
 
 }
 
 function setup(){
 createCanvas(640,480);
-
-//remover esto
-imageMode(RIGHT);
+imageMode(RIGHT)
 textSize(20);
-//
-
-control = new Controlador();
+control = new Controlador(0);
+control.setupCont();
 }
 
 function draw(){
- control.dibujar();
+  control.ejecutar();
+  console.log("estado: " + control.estado +" X: "+ mouseX +" Y: "+ mouseY);
 }
 
 function mousePressed(){

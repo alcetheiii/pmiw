@@ -1,39 +1,75 @@
 class Controlador {
-  constructor() {
-    this.estado = 0;
-    this.fondo = new Fondo();
-    this.boton = new Boton();
+  constructor(estadoActual) {
+    this.estado = estadoActual;
+    this.cJuego = new Juego();
+    this.cFondo = new Fondo();
+    this.cBoton = new Boton(estadoActual);
+    
   }
 
-  //----------------metodos----------------------
+//----------------metodos----------------------
 
-  // Dibuja la escena actual y sus botones
-  dibujar() {
-    this.fondo.dibujarEscena();
-    if (this.estado === 0) {
-      this.boton.botonJugar();
-    } else if (this.estado === 1) {
-      this.boton.botonVolver();
-      this.boton.botonSiguiente();
-    } else if (this.estado === 2) {
+//este método s usa en el método "click()"
+controlarEstado(cambioEst){
+  this.estado = cambioEst;
+}
+setupCont(){
+  this.cJuego.setupjuego();
+}
+
+// Dibuja la escena actual y sus botones
+ejecutar(){
+  if(this.estado === 0){
+
+      this.cFondo.dibujarFondo(3);
+      this.cBoton.dibujar(250, 420, 140, 40, "JUGAR");
+
+    } else if(this.estado === 1){
+
+      this.cFondo.dibujarFondo(4);
+      this.cBoton.dibujar(250, 420, 140, 40, "ENTIENDO");
+
+    }else if(this.estado === 2){
+
       //llamamos al juego
-    } else if (this.estado === 3) {
-      this.boton.botonReiniciar();
-    } else if (this.estado === 4) {
-      this.boton.botonReiniciar();
+      this.cFondo.dibujarFondo(0);
+      this.cJuego.dibujar();
+      this.cJuego.musicaFondo();
+
+    }else if(this.estado === 3){ // perdiste
+
+      this.cFondo.dibujarFondo(1);
+      this.cBoton.dibujar(250, 420, 140, 40, "REINTENTAR");
+
+    }else if(this.estado === 4){ // ganaste jej
+
+      this.cFondo.dibujarFondo(2);
+      this.cBoton.dibujar(250, 420, 140, 40, "REINTENTAR");
+
     }
   }
 
-  click() {
-    sBoton.play();
-    if (this.estado === 0 && this.boton.colision()) {
-      this.estado = 1;
-    } else if (this.estado === 1 && this.boton.colision()) {
-      this.estado = 2;
-    } else if (this.estado === 3 && this.boton.colision()) {
-      this.estado = 3;
-    } else if (this.estado === 4 && this.boton.colision()) {
-      this.estado = 4;
-    }
-  }
+// Maneja los clics del mouse en la escena actual
+click(){
+
+//para ejecutar el sonido de click (no queremos q se ejecute en el minijuego)
+if(this.cBoton.colision(250, 420, 140, 40) && this.estado === 0 ||this.estado === 1||this.estado === 3||this.estado === 4){
+  sBoton.play();
+}
+
+if(this.estado === 0 && this.cBoton.colision(250, 420, 140, 40)){
+  this.controlarEstado(1);
+  
+}else if(this.estado === 1 && this.cBoton.colision(250, 420, 140, 40)){
+  this.controlarEstado(2);
+
+}else if(this.estado === 3 && this.cBoton.colision(250, 420, 140, 40)){
+  this.controlarEstado(0);
+
+}else if(this.estado === 4 && this.cBoton.colision(250, 420, 140, 40)){
+  this.controlarEstado(0);
+}
+
+}
+
 }

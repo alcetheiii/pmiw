@@ -1,36 +1,37 @@
-class juego {
+class Juego {
   constructor() {
     this.notas = []; //array que sostiene las teclas que van a caer
     this.teclado = []; //array que sostiene las teclas de abajo
-    this.barravida = new Vida(10, 10, 200, 20); //crea una instancia de barra de vida para poder mostrarla en el juego
     this.letras = ['a', 's', 'd', 'f'];//array con todas las letras que se usan para el juego
     this.puntaje = 0; //declaracion del puntaje inicial para 
   }
 
   //esto debe renderizar o al menos traer todos las funciones dibujar de todas las demas clases
-  dibujarjuego() {
+  dibujar() {
     //se encarga del dibujar las teclas, y las notas individualmente, llamando a sus respectivos "dibujar"
     for (let i=0; i<4; i++) {
       this.notas[i].dibujarNota();
       this.teclado[i].dibujartecla();
-      //Checkea (chequea?) las colisiones entre cada nota con su respectiva tecla utilizando la aliniacion numerica dada por "i"
+      //Chequea las colisiones entre cada nota con su respectiva tecla utilizando la alineacion numerica dada por "i"
       if (key === this.letras[i]) {
-        if (keyIsPressed && this.colision(i, 50) && this.notas[i].activo === true) {
+        if (keyIsPressed && this.colision(i, 10) && this.notas[i].activo === true) {
           this.notas[i].activo = false;
+
           //debug
           print("hit");
         }
       }
     }
     //dibuja la barra de vida (WIP)
-    this.barravida.dibujarbarra();
+    this.barravida.dibujar();
   }
   
   //Crea todas las instancias de los elementos del juego para que esten listas para usarse
   setupjuego() {
+      this.barravida = new Vida(10, 10, 200, 20);
     for (let i=0; i<4; i++) {
-      this.notas[i] = new nota(i, random(0, -400));
-      this.teclado[i] = new teclas(i, 300);
+      this.notas[i] = new Nota(i, random(0, 600));
+      this.teclado[i] = new teclas(i, 400);
     }
   }
 
@@ -40,4 +41,12 @@ class juego {
       return true;
     }
   }
+
+  //reproduce el tema de fondo
+  musicaFondo(){
+    if (!sJuego.isPlaying()){
+       sJuego.loop(true);
+     }
+   }
+
 }
