@@ -1,0 +1,13 @@
+body{
+    background-image: url(data/img/puentebudapest.png);
+}
+
+.titulo{
+    color: #dd6712;
+}
+
+h5{
+    background-color: antiquewhite;
+    width: 400px;
+    margin: 125px auto;
+}
